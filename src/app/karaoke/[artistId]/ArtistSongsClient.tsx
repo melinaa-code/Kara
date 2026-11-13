@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { getArtist, getSongsByArtist } from "@/data/catalog";
 import { BrandMark } from "@/components/BrandMark";
+import { InstrumentalBadge } from "@/components/karaoke/InstrumentalBadge";
 import { useLocale } from "@/lib/locale";
 import { difficultyLabel } from "@/lib/i18n";
 
@@ -38,16 +39,22 @@ export default function ArtistSongsClient() {
       <h2 className="mt-10 text-sm uppercase tracking-[0.2em] text-white/40">
         {t("songs")}
       </h2>
+      <p className="mt-2 text-sm text-white/45">{t("instrumentalHint")}</p>
       <ul className="mt-3 divide-y divide-white/10">
         {songs.map((s) => (
           <li key={s.id}>
             <Link
               href={`/karaoke/${artist.id}/${s.id}`}
-              className="flex items-center justify-between py-5 transition hover:text-[var(--accent)]"
+              className="flex items-center justify-between gap-3 py-5 transition hover:text-[var(--accent)]"
             >
-              <span className="text-xl text-[var(--cream)]">{s.title}</span>
-              <span className="text-xs text-white/40">
-                {difficultyLabel(locale, s.difficulty)}
+              <span className="min-w-0">
+                <span className="block text-xl text-[var(--cream)]">{s.title}</span>
+                <span className="mt-1.5 inline-flex flex-wrap items-center gap-2">
+                  <InstrumentalBadge />
+                  <span className="text-xs text-white/40">
+                    {difficultyLabel(locale, s.difficulty)}
+                  </span>
+                </span>
               </span>
             </Link>
           </li>

@@ -1,6 +1,9 @@
 export type Locale = "fa" | "en";
 export type Difficulty = "easy" | "mid" | "hard";
 
+/** Only instrumental / karaoke beds are playable — no lead vocal. */
+export type AudioKind = "instrumental";
+
 export type LyricLine = {
   startMs: number;
   endMs: number;
@@ -30,6 +33,8 @@ export type Song = {
   locale: Locale;
   title: string;
   difficulty: Difficulty;
+  /** Must be instrumental karaoke bed (no singer vocal). */
+  audioKind: AudioKind;
   audioUrl: string;
   durationMs: number;
   lyrics: LyricLine[];

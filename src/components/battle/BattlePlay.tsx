@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getArtist, getSong, getSongsByDifficulty } from "@/data/catalog";
 import { BrandMark } from "@/components/BrandMark";
+import { InstrumentalBadge } from "@/components/karaoke/InstrumentalBadge";
 import { LyricsView } from "@/components/karaoke/LyricsView";
 import { BlankChallenge } from "@/components/battle/BlankChallenge";
 import { useLocale } from "@/lib/locale";
@@ -107,6 +108,7 @@ export function BattlePlay() {
             <p className="mt-2 text-white/55">
               {chooser?.name} · {difficultyLabel(locale, difficulty)}
             </p>
+            <p className="mt-1 text-sm text-white/40">{t("instrumentalHint")}</p>
           </div>
           <ul className="flex flex-col divide-y divide-white/10">
             {pool.map((s) => {
@@ -115,16 +117,19 @@ export function BattlePlay() {
                 <li key={s.id}>
                   <button
                     type="button"
-                    className="flex w-full items-center justify-between py-4 text-start transition hover:text-[var(--accent)]"
+                    className="flex w-full items-center justify-between gap-3 py-4 text-start transition hover:text-[var(--accent)]"
                     onClick={() => state.selectSong(s.id)}
                   >
-                    <span>
+                    <span className="min-w-0">
                       <span className="block text-lg text-[var(--cream)]">
                         {s.title}
                       </span>
-                      <span className="text-sm text-white/45">{artist?.name}</span>
+                      <span className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-white/45">
+                        <span>{artist?.name}</span>
+                        <InstrumentalBadge />
+                      </span>
                     </span>
-                    <span className="text-xs uppercase tracking-wider text-white/35">
+                    <span className="shrink-0 text-xs uppercase tracking-wider text-white/35">
                       {difficultyLabel(locale, s.difficulty)}
                     </span>
                   </button>
@@ -158,7 +163,10 @@ export function BattlePlay() {
             <h2 className="font-[family-name:var(--font-display)] text-2xl text-[var(--cream)]">
               {song.title}
             </h2>
-            <p className="text-sm text-white/40">
+            <div className="mt-2 flex justify-center">
+              <InstrumentalBadge />
+            </div>
+            <p className="mt-2 text-sm text-white/40">
               {t("blanksLeft")}{" "}
               {Math.max(0, song.blanks.length - state.blankIndex)}
             </p>

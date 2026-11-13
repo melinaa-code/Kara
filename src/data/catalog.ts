@@ -1,6 +1,8 @@
 import type { Artist, Song } from "./types";
 
-/** Demo catalog — original sample lyrics for product demos (not commercial tracks). */
+type SongSeed = Omit<Song, "audioKind">;
+
+/** Demo catalog — original sample lyrics over instrumental beds (no lead vocal). */
 export const artists: Artist[] = [
   {
     id: "niloofar",
@@ -38,7 +40,7 @@ function lines(
   return pairs.map(([startMs, endMs, text]) => ({ startMs, endMs, text }));
 }
 
-export const songs: Song[] = [
+const songSeeds: SongSeed[] = [
   {
     id: "easy-moon",
     artistId: "niloofar",
@@ -519,6 +521,16 @@ export const songs: Song[] = [
   },
 ];
 
+/** All playable catalog tracks are instrumental karaoke beds. */
+export const songs: Song[] = songSeeds.map((s) => ({
+  ...s,
+  audioKind: "instrumental" as const,
+}));
+
+function isPlayable(song: Song) {
+  return song.audioKind === "instrumental";
+}
+
 export function getArtists(locale: string = "fa") {
   return artists.filter((a) => a.locale === locale);
 }
@@ -528,13 +540,17 @@ export function getArtist(id: string) {
 }
 
 export function getSongsByArtist(artistId: string) {
-  return songs.filter((s) => s.artistId === artistId);
+  return songs.filter((s) => s.artistId === artistId && isPlayable(s));
 }
 
 export function getSong(id: string) {
-  return songs.find((s) => s.id === id);
+  const song = songs.find((s) => s.id === id);
+  return song && isPlayable(song) ? song : undefined;
 }
 
 export function getSongsByDifficulty(difficulty: Song["difficulty"], locale = "fa") {
-  return songs.filter((s) => s.difficulty === difficulty && s.locale === locale);
+  return songs.filter(
+    (s) =>
+      s.difficulty === difficulty && s.locale === locale && isPlayable(s),
+  );
 }
