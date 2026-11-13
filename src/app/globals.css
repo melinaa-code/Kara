@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+:root {
+  --background: #120d0a;
+  --foreground: #f3ebe2;
+  --cream: #f3ebe2;
+  --muted: #a89888;
+  --accent: #e8a848;
+  --accent-deep: #c45a2c;
+  --danger: #e07060;
+  --success: #7ec8a0;
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #1a1008;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: transform 160ms ease, filter 160ms ease, opacity 160ms ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: var(--cream);
+  padding: 0.75rem 1.5rem;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(232, 168, 72, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.input-field {
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--cream);
+  padding: 0.75rem 1rem;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: rgba(232, 168, 72, 0.65);
+  box-shadow: 0 0 0 3px rgba(232, 168, 72, 0.15);
+}
+
+.stage-beams {
+  background:
+    linear-gradient(105deg, transparent 40%, rgba(232, 168, 72, 0.07) 48%, transparent 56%),
+    linear-gradient(75deg, transparent 35%, rgba(196, 90, 44, 0.08) 50%, transparent 65%);
+  animation: beam-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes beam-drift {
+  from {
+    transform: translateX(-2%) scale(1);
+  }
+  to {
+    transform: translateX(2%) scale(1.03);
+  }
+}
+
+.lyric-pulse {
+  animation: lyric-glow 1.4s ease-in-out infinite;
+}
+
+@keyframes lyric-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    text-shadow: 0 0 24px rgba(232, 168, 72, 0.35);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 420ms ease both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-flash {
+  animation: result-pop 480ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes result-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.home-cta {
+  position: relative;
+  display: block;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: color 180ms ease, padding-inline-start 180ms ease;
+}
+
+.home-cta:hover {
+  color: var(--accent);
+  padding-inline-start: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
