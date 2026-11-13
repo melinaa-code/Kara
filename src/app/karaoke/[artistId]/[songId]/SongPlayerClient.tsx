@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { getArtist, getSong } from "@/data/catalog";
 import { BrandMark } from "@/components/BrandMark";
+import { InstrumentalBadge } from "@/components/karaoke/InstrumentalBadge";
 import { KaraokePlayer } from "@/components/karaoke/KaraokePlayer";
 import { useLocale } from "@/lib/locale";
 import { difficultyLabel } from "@/lib/i18n";
@@ -39,9 +40,13 @@ export default function SongPlayerClient() {
         <h1 className="mt-1 font-[family-name:var(--font-display)] text-4xl text-[var(--cream)]">
           {song.title}
         </h1>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-white/35">
-          {difficultyLabel(locale, song.difficulty)}
-        </p>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+          <InstrumentalBadge />
+          <span className="text-xs uppercase tracking-[0.2em] text-white/35">
+            {difficultyLabel(locale, song.difficulty)}
+          </span>
+        </div>
+        <p className="mt-3 text-sm text-white/45">{t("instrumentalHint")}</p>
       </div>
 
       <KaraokePlayer song={song} />

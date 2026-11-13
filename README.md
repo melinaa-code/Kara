@@ -1,11 +1,15 @@
 # Lyricue
 
-Karaoke and missing-line battles. Pick a singer, sing along, or run a local party tournament (Easy → Mid → Hard) where players fill paused lyric blanks.
+Karaoke and missing-line battles. Pick a singer, sing along to an **instrumental** bed with synced lyrics, or run a local party tournament (Easy → Mid → Hard) where players fill paused lyric blanks.
 
 ## Modes
 
-- **Karaoke** — singer → song → synced lyrics
+- **Karaoke** — singer → song → instrumental audio + synced lyrics (you sing)
 - **Line Battle** — add players, chooser picks a song per round, turn-based blanks, elimination, leaderboard
+
+## Audio rule
+
+Playable tracks are **instrumental / karaoke beds only** (`audioKind: "instrumental"`) — no lead singer vocal. Lyrics highlight on top of that bed.
 
 ## Stack
 
@@ -22,4 +26,4 @@ Optional: set `OPENAI_API_KEY` for Whisper speech-to-text on blanks. Without it,
 
 ## Demo content
 
-Sample artists and original demo lyrics ship with simple generated melody beds under `public/audio/`. Replace with licensed tracks when ready.
+Sample artists and original demo lyrics ship with generated instrumental melody beds under `public/audio/`. Replace with licensed instrumental/karaoke tracks when ready.
